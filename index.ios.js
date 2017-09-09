@@ -1,3 +1,9 @@
+/**
+ * Airbnb Clone App
+ *@author: Andy
+ *@Url: http://imandy.ie
+ */
+
 import React from 'react';
 import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';

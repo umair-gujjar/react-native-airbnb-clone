@@ -7,8 +7,8 @@
 import createReducer from '../helpers/createReducer'
 import * as types from '../actions/types'
 
-export const activeScreen = createReducer({}, {
-  [types.SET_SCREEN](state, action) {
+export const logIn = createReducer({}, {
+  [types.LOG_IN](state, action) {
     return action;
   }
 });
