@@ -15,7 +15,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-export default class TopBavBar extends Component {
+export default class TopNavBar extends Component {
   
   getButton(location) {
     const rightButton = this.props.rightButton;
@@ -46,7 +46,7 @@ export default class TopBavBar extends Component {
   }
 }
 
-TopBavBar.propTypes = {
+TopNavBar.propTypes = {
   rightButton: PropTypes.any,
   rightButtonCallback: PropTypes.func,
   leftButton: PropTypes.any,
