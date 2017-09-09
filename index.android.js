@@ -1,53 +1,38 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * Airbnb Clone App
+ *@author: Andy
+ *@Url: http://imandy.ie
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React from 'react';
+import { AppRegistry, StatusBar } from 'react-native';
+import { Provider } from 'react-redux';
+import { compose, createStore, combineReducers, applyMiddleware} from 'redux';
+import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+import reducer from './src/reducers';
+import LoggedOut from './src/screens/LoggedOut';
 
-export default class AirbnbClone extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
+StatusBar.setBarStyle('light-content', true);
+
+const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__  });
+
+function configureStore(initialState) {
+  const enhancer = compose(
+    applyMiddleware(
+      thunkMiddleware, // used to dispatch() functions
+      loggerMiddleware, // used for logging actions
+    ),
+  );
+  return createStore(reducer, initialState, enhancer);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+const store = configureStore({});
 
-AppRegistry.registerComponent('AirbnbClone', () => AirbnbClone);
+const App = () => (
+  <Provider store={store}>
+    <LoggedOut />
+  </Provider>
+)
+
+AppRegistry.registerComponent('AirbnbClone', () => App);

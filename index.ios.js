@@ -5,14 +5,15 @@
  */
 
 import React from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { compose, createStore, combineReducers, applyMiddleware} from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import reducer from './src/reducers';
+import LoggedOut from './src/screens/LoggedOut';
 
-import AppContainer from './src/containers/AppContainer';
+StatusBar.setBarStyle('light-content', true);
 
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__  });
 
@@ -30,7 +31,7 @@ const store = configureStore({});
 
 const App = () => (
   <Provider store={store}>
-    <AppContainer />
+    <LoggedOut />
   </Provider>
 )
 
