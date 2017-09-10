@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import { AppRegistry, StatusBar } from 'react-native';
 import store from './src/redux/store';
 import AppWithNavigationState from './src/navigators/AppNavigator';

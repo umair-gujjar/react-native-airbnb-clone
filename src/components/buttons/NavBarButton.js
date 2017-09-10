@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import colors from '../../styles/colors';
 
 import {
   Text,
@@ -30,7 +29,7 @@ NavBarButton.propTypes = {
   callback: PropTypes.func.isRequired,
   location: PropTypes.string.isRequired,
   color: PropTypes.string,
-}
+};
 
 const styles = StyleSheet.create({
   buttonText: {

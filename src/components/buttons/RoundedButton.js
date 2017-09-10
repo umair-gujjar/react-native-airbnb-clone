@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import colors from '../../styles/colors';
 
 import {
   Text,
@@ -32,8 +31,8 @@ export default class RoundedButton extends Component {
         </View>
       </TouchableHighlight>
     );
-  }
-}
+  };
+};
 
 RoundedButton.propTypes = {
   text: PropTypes.string.isRequired,
@@ -41,7 +40,7 @@ RoundedButton.propTypes = {
   background: PropTypes.string,
   color: PropTypes.string,
   icon: PropTypes.object,
-}
+};
 
 const styles = StyleSheet.create({
   wrapper: {
