@@ -8,10 +8,11 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../actions';
+import { ActionCreators } from '../redux/actions';
 import colors from '../styles/colors';
-import TopNavBar from '../components/navigation/TopNavBar';
+import { transparentHeaderStyle } from '../styles/navigation';
 import RoundedButton from '../components/buttons/RoundedButton';
+import NavBarButton from '../components/buttons/NavBarButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
@@ -22,7 +23,13 @@ import {
   StyleSheet,
 } from 'react-native';
 
-class LoggedOut extends Component {
+export default class LoggedOut extends Component {
+
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    headerRight: <NavBarButton callback={() => navigation.navigate('Login')} location="right" color={colors.white} text="Log In" />,
+    headerStyle: transparentHeaderStyle
+  });
+
   continueWithFacebook() {
     alert("Continue with Facebook pressed");
   }
@@ -34,7 +41,6 @@ class LoggedOut extends Component {
   render() {
     return (
       <View style={styles.wrapper}>
-        <TopNavBar rightButton="Log In"/>
         <View style={styles.welcomeWrapper}>
           <Image
             style={styles.logo}
@@ -93,6 +99,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginBottom: 40,
+    marginTop: 50,
   },
   welcomeWrapper: {
     flex: 1,
@@ -133,17 +140,9 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 13,
     fontWeight: '600'
+  },
+  loginButtonText: {
+    color: colors.white,
+    fontSize: 18,
   }
 });
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(ActionCreators, dispatch);
-}
-
-const mapStateToProps = (state) => {
-  return {
-    activeScreen: state.activeScreen
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoggedOut);

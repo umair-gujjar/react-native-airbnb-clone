@@ -4,35 +4,22 @@
  *@Url: http://imandy.ie
  */
 
-import React from 'react';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux'
 import { AppRegistry, StatusBar } from 'react-native';
-import { Provider } from 'react-redux';
-import { compose, createStore, combineReducers, applyMiddleware} from 'redux';
-import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
-import reducer from './src/reducers';
-import LoggedOut from './src/screens/LoggedOut';
+import store from './src/redux/store';
+import AppWithNavigationState from './src/navigators/AppNavigator';
 
 StatusBar.setBarStyle('light-content', true);
 
-const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__  });
-
-function configureStore(initialState) {
-  const enhancer = compose(
-    applyMiddleware(
-      thunkMiddleware, // used to dispatch() functions
-      loggerMiddleware, // used for logging actions
-    ),
-  );
-  return createStore(reducer, initialState, enhancer);
+class AirBnbClone extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <AppWithNavigationState />
+      </Provider>
+    );
+  }
 }
 
-const store = configureStore({});
-
-const App = () => (
-  <Provider store={store}>
-    <LoggedOut />
-  </Provider>
-)
-
-AppRegistry.registerComponent('AirbnbClone', () => App);
+AppRegistry.registerComponent('AirbnbClone', () => AirBnbClone);
