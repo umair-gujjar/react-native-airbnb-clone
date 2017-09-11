@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 
 import {
+  View,
   Text,
   TouchableOpacity,
   StyleSheet,
@@ -15,17 +16,24 @@ import {
 
 export default class NavBarButton extends Component {
   render() {
-    const location = this.props.location === 'right' ? { marginRight: 25 } : { marginLeft: 25 };
+    const location = this.props.location === 'right' ? { marginRight: 20 } : { marginLeft: 20 };
+    let content;
+    if (this.props.text) {
+      content = <Text style={[{color: this.props.color},location,styles.buttonText]}>{this.props.text}</Text>;
+    } else if (this.props.icon) {
+      content = <View style={location}>{this.props.icon}</View>;
+    }
     return (
       <TouchableOpacity onPress={this.props.callback}>
-        <Text style={[{color: this.props.color},location,styles.buttonText]}>{this.props.text}</Text>
+        {content}
       </TouchableOpacity>
     );
   }
 }
 
 NavBarButton.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  icon: PropTypes.object,
   callback: PropTypes.func.isRequired,
   location: PropTypes.string.isRequired,
   color: PropTypes.string,
