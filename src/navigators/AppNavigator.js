@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
+import colors from '../styles/colors';
 
 import LoggedOut from '../screens/LoggedOut';
 import Login from '../screens/LogIn';
@@ -21,8 +22,8 @@ const fade = (props) => {
   const translateY = 0;
 
   const opacity = position.interpolate({
-    inputRange: [index - 0.7, index, index + 0.7],
-    outputRange: [0.3, 1, 0.3]
+    inputRange: [index - 1, index, index + 1],
+    outputRange: [0, 1, 1]
   });
 
   return {
@@ -40,7 +41,7 @@ export const AppNavigator = StackNavigator({
     transitionConfig: () => ({
       screenInterpolator: sceneProps => {
         const {scene} = sceneProps;
-        if (scene.route.routeName === 'Login') {
+        if (scene.route.routeName === 'Login' || scene.route.routeName === 'ForgotPassword') {
           return fade(sceneProps);
         }
         return CardStackStyleInterpolator.forHorizontal(sceneProps)

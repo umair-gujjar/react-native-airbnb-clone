@@ -6,6 +6,8 @@
 
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+import colors from '../styles/colors';
+import { transparentHeaderStyle } from '../styles/navigation';
 
 import {
   View,
@@ -14,6 +16,12 @@ import {
 } from 'react-native';
 
 export default class ForgotPassword extends Component {
+
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    headerStyle: transparentHeaderStyle,
+    headerTintColor: colors.white
+  });
+
   render() {
     return (
       <View style={styles.wrapper}>
@@ -25,7 +33,8 @@ export default class ForgotPassword extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
+    backgroundColor: colors.darkGreen,
+    flex: 1,
     display: 'flex',
-    padding: 50,
   },
 });

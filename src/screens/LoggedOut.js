@@ -28,7 +28,7 @@ export default class LoggedOut extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
     headerRight: <NavBarButton callback={() => navigation.navigate('Login')} location="right" color={colors.white} text="Log In" />,
     headerStyle: transparentHeaderStyle,
-    headerTintColor: colors.white
+    headerTintColor: colors.white,
   });
 
   continueWithFacebook() {
