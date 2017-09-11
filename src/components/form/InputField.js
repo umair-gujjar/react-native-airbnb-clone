@@ -20,10 +20,17 @@ export default class InputField extends Component {
     const labelColor = this.props.labelColor;
     const labelTextSize = this.props.labelTextSize;
     const borderColor = this.props.inputBorderColor;
-    const inputType = this.props.inputType === 'text' ? false : true;
+    const inputType = this.props.inputType === 'text' || this.props.inputType === 'email' ? false : true;
+    let keyboardType = this.props.inputType === 'email' ? 'email-address' : 'default';
+
     return (
       <View style={[wrapperStyle,styles.wrapper]}>
-        <Text style={[{color: labelColor, fontSize: labelTextSize}, styles.label]}>{this.props.labelText}</Text>
+        <Text 
+          style={[{color: labelColor, fontSize: labelTextSize}, styles.label]}
+          keyboardType={keyboardType}
+        >
+          {this.props.labelText}
+        </Text>
         <TextInput
           style={[{color: this.props.textColor, borderBottomColor: borderColor}, styles.inputField]}
           secureTextEntry={inputType}

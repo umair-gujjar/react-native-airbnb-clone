@@ -49,7 +49,7 @@ export default class ForgotPassword extends Component {
             labelTextSize={14}
             labelColor={colors.white}
             inputBorderColor={colors.semiTransparentWhite}
-            inputType="text"
+            inputType="email"
           />
         </View>
       </View>

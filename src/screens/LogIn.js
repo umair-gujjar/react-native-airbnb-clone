@@ -79,7 +79,7 @@ export default class LogIn extends Component {
               labelTextSize={14}
               labelColor={colors.white}
               inputBorderColor={colors.semiTransparentWhite}
-              inputType="text"
+              inputType="email"
             />
             <InputField
               customStyle={{marginBottom: 30}}
