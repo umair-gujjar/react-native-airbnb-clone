@@ -9,6 +9,8 @@ import { PropTypes } from 'prop-types';
 import colors from '../styles/colors';
 import { transparentHeaderStyle } from '../styles/navigation';
 import InputField from '../components/form/InputField';
+import NavBarButton from '../components/buttons/NavBarButton';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
   View,
@@ -19,6 +21,17 @@ import {
 export default class ForgotPassword extends Component {
 
   static navigationOptions = ({ navigation, screenProps }) => ({
+    headerLeft: <NavBarButton
+                  callback={() => navigation.goBack()}
+                  location="left"
+                  icon={
+                    <Icon
+                      name="angle-left"
+                      color={colors.white}
+                      size={30}
+                    />
+                  }
+                />,
     headerStyle: transparentHeaderStyle,
     headerTintColor: colors.white
   });
