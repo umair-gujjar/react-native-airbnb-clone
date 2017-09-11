@@ -1,5 +1,5 @@
 # react-native-airbnb-clone
-A AirBnB mobile app clone using React Native & Redux
+AirBnB mobile app clone using React Native & Redux
 
 <img src="./airbnbClone.png" width="300">
 

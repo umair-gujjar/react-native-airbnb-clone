@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import colors from '../styles/colors';
 import { transparentHeaderStyle } from '../styles/navigation';
+import InputField from '../components/form/InputField';
 
 import {
   View,
@@ -25,7 +26,19 @@ export default class ForgotPassword extends Component {
   render() {
     return (
       <View style={styles.wrapper}>
-        <Text style={styles.welcomeText}>Forgot Password Screen</Text>
+        <View style={styles.form}>
+          <Text style={styles.forgotPasswordHeader}>Forgot your password?</Text>
+          <Text style={styles.forgotPasswordSubheader}>Enter your email to find your account.</Text>
+          <InputField
+            customStyle={{marginBottom: 30}}
+            textColor={colors.white}
+            labelText="EMAIL ADDRESS"
+            labelTextSize={14}
+            labelColor={colors.white}
+            inputBorderColor={colors.semiTransparentWhite}
+            inputType="text"
+          />
+        </View>
       </View>
     );
   }
@@ -37,4 +50,21 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
   },
+  form: {
+    marginTop: 90,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  forgotPasswordHeader: {
+    fontSize: 28,
+    color: colors.white,
+    fontWeight: '300',
+  },
+  forgotPasswordSubheader: {
+    color: colors.white,
+    fontWeight: '600',
+    fontSize: 15,
+    marginTop: 10,
+    marginBottom: 60,
+  }
 });

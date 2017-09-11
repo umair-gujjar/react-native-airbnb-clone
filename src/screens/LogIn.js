@@ -50,7 +50,7 @@ export default class LogIn extends Component {
   }
 
   handleScroll(event) {
-    if (event.nativeEvent.contentOffset.y > 40) {
+    if (event.nativeEvent.contentOffset.y > 20) {
       this.setState({
         topBorderColor: colors.semiTransparentWhite
       });
@@ -106,10 +106,10 @@ const styles = StyleSheet.create({
   formWrapper: {
     paddingLeft: 20,
     paddingRight: 20,
-    paddingTop: 40,
+    paddingTop: 20,
   },
   loginHeader: {
-    fontSize: 25,
+    fontSize: 28,
     color: colors.white,
     fontWeight: '300',
     marginBottom: 40,
