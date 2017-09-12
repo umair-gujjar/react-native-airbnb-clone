@@ -9,6 +9,7 @@ import { PropTypes } from 'prop-types';
 import colors from '../styles/colors';
 import { transparentHeaderStyle } from '../styles/navigation';
 import NavBarButton from '../components/buttons/NavBarButton';
+import NextArrowButtom from '../components/buttons/NextArrowButton';
 import InputField from '../components/form/InputField';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
@@ -16,6 +17,7 @@ import {
   Text,
   ScrollView,
   StyleSheet,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 export default class LogIn extends Component {
@@ -45,6 +47,7 @@ export default class LogIn extends Component {
     super(props);
     this.state = {
       topBorderColor: 'transparent',
+      nextButtonDisabled: true,
     }
     this.handleScroll = this.handleScroll.bind(this);
   }
@@ -60,11 +63,18 @@ export default class LogIn extends Component {
       });
     }
   }
+  
+  goToNextStep() {
+    alert("Next button pressed")
+  }
 
   render() {
     const topBorderColor = this.state.topBorderColor;
     return (
-      <View style={styles.wrapper}>
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={styles.wrapper}
+      >
         <View style={[{borderTopColor: topBorderColor},styles.scrollViewWrapper]}>
           <ScrollView
             style={styles.formWrapper}
@@ -91,8 +101,14 @@ export default class LogIn extends Component {
               inputType="password"
             />
           </ScrollView>
+          <View style={styles.nextButton}>
+            <NextArrowButtom
+              disabled={this.state.nextButtonDisabled}
+              callback={() => navigation.goToNextStep()}
+            />
+          </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -107,6 +123,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 20,
+    height: '80%',
   },
   loginHeader: {
     fontSize: 28,
@@ -117,5 +134,10 @@ const styles = StyleSheet.create({
   scrollViewWrapper: {
     marginTop: 70,
     borderTopWidth: 1,
+  },
+  nextButton: {
+    alignItems: 'flex-end',
+    right: 20,
+    bottom: 0
   }
 });
