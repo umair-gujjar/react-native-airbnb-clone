@@ -155,7 +155,7 @@ export default class LogIn extends Component {
           <View style={styles.nextButton}>
             <NextArrowButtom
               disabled={this.toggleNextButtonState()}
-              callback={() => this.goToNextStep()}
+              callback={this.goToNextStep}
             />
           </View>
         </View>

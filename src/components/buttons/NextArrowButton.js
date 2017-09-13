@@ -19,7 +19,7 @@ export default class NextArrowButton extends Component {
     return (
       <TouchableOpacity
         style={[opacityStyle,styles.button]}
-        onPress={this.props.callback}
+        onPress={ () => { this.props.callback() } }
         disabled={this.props.disabled}
       >
         <Icon

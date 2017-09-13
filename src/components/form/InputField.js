@@ -14,6 +14,7 @@ import {
   Animated,
   Easing,
   TextInput,
+  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 
@@ -23,7 +24,14 @@ export default class InputField extends Component {
     super(props);
     this.state = {
       scaleValue: new Animated.Value(0),
+      secureInput: true,
     }
+  }
+  
+  componentWillMount() {
+    this.setState({
+      secureInput: this.props.inputType === 'text' || this.props.inputType === 'email' ? false : true,
+    });
   }
 
   scale(value) {
@@ -36,13 +44,14 @@ export default class InputField extends Component {
       }
     ).start();
   }
+  
+  togglePasswordShow() {
+    this.setState({
+      secureInput: !this.state.secureInput,
+    });
+  }
 
   render() {
-    const wrapperStyle = this.props.customStyle;
-    const labelColor = this.props.labelColor;
-    const labelTextSize = this.props.labelTextSize;
-    const borderColor = this.props.inputBorderColor;
-    const inputType = this.props.inputType === 'text' || this.props.inputType === 'email' ? false : true;
     let keyboardType = this.props.inputType === 'email' ? 'email-address' : 'default';
 
     const iconScale = this.state.scaleValue.interpolate({
@@ -54,13 +63,23 @@ export default class InputField extends Component {
     this.scale(scaleValue);
 
     return (
-      <View style={[wrapperStyle,styles.wrapper]}>
+      <View style={[this.props.customStyle,styles.wrapper]}>
         <Text 
-          style={[{color: labelColor, fontSize: labelTextSize}, styles.label]}
+          style={[{color: this.props.labelColor, fontSize: this.props.labelTextSize}, styles.label]}
           keyboardType={keyboardType}
         >
           {this.props.labelText}
         </Text>
+        {this.props.inputType === 'password' &&
+          <TouchableOpacity
+            style={styles.showButton}
+            onPress={() => this.togglePasswordShow()}
+          >
+            <Text style={styles.showButtonText}>
+              {this.state.secureInput ? 'Show' : 'Hide'}
+            </Text>
+          </TouchableOpacity>
+        }
         <Animated.View style={{transform: [ {scale: iconScale} ], position: 'absolute', right: 0, bottom: 6}}>
           <Icon
             name="check"
@@ -69,8 +88,8 @@ export default class InputField extends Component {
           />
         </Animated.View>
         <TextInput
-          style={[{color: this.props.textColor, borderBottomColor: borderColor}, styles.inputField]}
-          secureTextEntry={inputType}
+          style={[{color: this.props.textColor, borderBottomColor: this.props.inputBorderColor}, styles.inputField]}
+          secureTextEntry={this.state.secureInput}
           onChange={(event) => this.props.onChangeText(event.nativeEvent.text)}
         />
       </View>
@@ -100,7 +119,15 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   label: {
-    fontWeight: '600',
-    marginBottom: 10
+    fontWeight: '700',
+    marginBottom: 10,
+  },
+  showButton: {
+    position: 'absolute',
+    right: 0,
+  },
+  showButtonText: {
+    color: colors.white,
+    fontWeight: '700',
   }
 });
