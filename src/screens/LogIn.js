@@ -47,9 +47,13 @@ export default class LogIn extends Component {
     super(props);
     this.state = {
       topBorderColor: 'transparent',
-      nextButtonDisabled: true,
+      validEmail: false,
+      validPassword: false,
+
     }
     this.handleScroll = this.handleScroll.bind(this);
+    this.onEmailChange = this.onEmailChange.bind(this);
+    this.onPasswordChange = this.onPasswordChange.bind(this);
   }
 
   handleScroll(event) {
@@ -66,6 +70,49 @@ export default class LogIn extends Component {
   
   goToNextStep() {
     alert("Next button pressed")
+  }
+
+  onEmailChange(text) {
+    const emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (!this.state.validEmail) {
+      if (emailCheckRegex.test(text)) {
+        this.setState({
+          validEmail: true
+        });
+      }
+    } else {
+      if (!emailCheckRegex.test(text)) {
+        this.setState({
+          validEmail: false
+        });
+      }
+    }
+  }
+  
+  onPasswordChange(text) {
+    if (!this.state.validPassword) {
+      if (text.length > 4) {
+        this.setState({
+          validPassword: true
+        });
+      }
+    } else {
+      if (text.length <= 4) {
+        this.setState({
+          validPassword: false
+        });
+      }
+    }
+  }
+
+  toggleNextButtonState() {
+    if (this.state.validEmail && this.state.validPassword) {
+      return false;
+    } else if (!this.state.validEmail || !this.state.validPassword) {
+      return true;
+    }
+    return true;
   }
 
   render() {
@@ -90,6 +137,8 @@ export default class LogIn extends Component {
               labelColor={colors.white}
               inputBorderColor={colors.semiTransparentWhite}
               inputType="email"
+              showCheckmark={this.state.validEmail}
+              onChangeText={this.onEmailChange}
             />
             <InputField
               customStyle={{marginBottom: 30}}
@@ -99,12 +148,14 @@ export default class LogIn extends Component {
               labelColor={colors.white}
               inputBorderColor={colors.semiTransparentWhite}
               inputType="password"
+              showCheckmark={this.state.validPassword}
+              onChangeText={this.onPasswordChange}
             />
           </ScrollView>
           <View style={styles.nextButton}>
             <NextArrowButtom
-              disabled={this.state.nextButtonDisabled}
-              callback={() => navigation.goToNextStep()}
+              disabled={this.toggleNextButtonState()}
+              callback={() => this.goToNextStep()}
             />
           </View>
         </View>
