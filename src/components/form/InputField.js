@@ -19,19 +19,13 @@ import {
 } from 'react-native';
 
 export default class InputField extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
       scaleValue: new Animated.Value(0),
-      secureInput: true,
-    }
-  }
-  
-  componentWillMount() {
-    this.setState({
       secureInput: this.props.inputType === 'text' || this.props.inputType === 'email' ? false : true,
-    });
+    }
   }
 
   scale(value) {
@@ -55,8 +49,8 @@ export default class InputField extends Component {
     let keyboardType = this.props.inputType === 'email' ? 'email-address' : 'default';
 
     const iconScale = this.state.scaleValue.interpolate({
-    inputRange: [0, 0.5,  1],
-    outputRange: [0, 1.6, 1]
+      inputRange: [0, 0.5,  1],
+      outputRange: [0, 1.6, 1]
     });
     
     const scaleValue = this.props.showCheckmark ? 1 : 0;
@@ -91,6 +85,9 @@ export default class InputField extends Component {
           style={[{color: this.props.textColor, borderBottomColor: this.props.inputBorderColor}, styles.inputField]}
           secureTextEntry={this.state.secureInput}
           onChange={(event) => this.props.onChangeText(event.nativeEvent.text)}
+          autoCapitalize={this.props.autoCapitalize ? 'sentences' : 'none'}
+          autoFocus={this.props.autoFocus || false}
+          autoCorrect={false}
         />
       </View>
     );
@@ -107,6 +104,8 @@ InputField.propTypes = {
   inputType: PropTypes.string,
   showCheckmark: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
+  autoCapitalize: PropTypes.bool,
+  autoFocus: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({

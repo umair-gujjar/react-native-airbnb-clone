@@ -11,6 +11,8 @@ import { transparentHeaderStyle } from '../styles/navigation';
 import NavBarButton from '../components/buttons/NavBarButton';
 import NextArrowButtom from '../components/buttons/NextArrowButton';
 import InputField from '../components/form/InputField';
+import Loader from '../components/Loader';
+import Notification from '../components/Notification';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   View,
@@ -47,13 +49,18 @@ export default class LogIn extends Component {
     super(props);
     this.state = {
       topBorderColor: 'transparent',
+      formStatus: 'valid',
       validEmail: false,
+      emailAddress: '',
       validPassword: false,
+      loadingVisible: false,
 
     }
     this.handleScroll = this.handleScroll.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.goToNextStep = this.goToNextStep.bind(this);
+    this.closeNotification = this.closeNotification.bind(this);
   }
 
   handleScroll(event) {
@@ -69,12 +76,27 @@ export default class LogIn extends Component {
   }
   
   goToNextStep() {
-    alert("Next button pressed")
+    this.setState({loadingVisible: true});
+    setTimeout(() => {
+      if (this.state.emailAddress === 'wrong@email.com') {
+        this.setState({
+          loadingVisible: false,
+          formStatus: 'invalid',
+        });
+      } else {
+        this.setState({
+          loadingVisible: false,
+          formStatus: 'valid',
+        });
+      }
+    },1000);
   }
 
   onEmailChange(text) {
     const emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+    this.setState({
+      emailAddress: text
+    });
     if (!this.state.validEmail) {
       if (emailCheckRegex.test(text)) {
         this.setState({
@@ -114,15 +136,22 @@ export default class LogIn extends Component {
     }
     return true;
   }
+  
+  closeNotification() {
+    this.setState({
+      formStatus: 'valid',
+    });
+  }
 
   render() {
-    const topBorderColor = this.state.topBorderColor;
+    const background = this.state.formStatus === 'valid' ? colors.darkGreen : colors.darkOrange;
+    const showNotification = this.state.formStatus === 'valid' ? false : true;
     return (
       <KeyboardAvoidingView
         behavior="padding"
-        style={styles.wrapper}
+        style={[{backgroundColor: background}, styles.wrapper]}
       >
-        <View style={[{borderTopColor: topBorderColor},styles.scrollViewWrapper]}>
+        <View style={[{borderTopColor: this.state.topBorderColor},styles.scrollViewWrapper]}>
           <ScrollView
             style={styles.formWrapper}
             onScroll={this.handleScroll}
@@ -139,6 +168,7 @@ export default class LogIn extends Component {
               inputType="email"
               showCheckmark={this.state.validEmail}
               onChangeText={this.onEmailChange}
+              autoFocus={true}
             />
             <InputField
               customStyle={{marginBottom: 30}}
@@ -158,7 +188,24 @@ export default class LogIn extends Component {
               callback={this.goToNextStep}
             />
           </View>
+          <View style={showNotification ? {marginTop: 10} : {}}>
+            <Notification
+              showNotification={showNotification}
+              onCloseNotification={this.closeNotification}
+              view={
+                <View style={styles.notificationContent}>
+                  <Text style={styles.errorText}>Error</Text>
+                  <Text style={styles.errorMessage}>Those credentials don't look right.</Text>
+                  <Text style={styles.errorMessage}>Please try again.</Text>
+                </View>
+              }
+            />
+          </View>
         </View>
+        <Loader
+          modalVisible={this.state.loadingVisible}
+          animationType="fade"
+        />
       </KeyboardAvoidingView>
     );
   }
@@ -166,7 +213,6 @@ export default class LogIn extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: colors.darkGreen,
     flex: 1,
     display: 'flex',
   },
@@ -185,10 +231,26 @@ const styles = StyleSheet.create({
   scrollViewWrapper: {
     marginTop: 70,
     borderTopWidth: 1,
+    flex: 1,
   },
   nextButton: {
     alignItems: 'flex-end',
     right: 20,
-    bottom: 0
+    bottom: 0,
+  },
+  notificationContent: {
+    flexDirection:'row',
+    flexWrap: 'wrap', 
+    alignItems: 'flex-start',
+  },
+  errorText: {
+    color: colors.darkOrange,
+    marginRight: 5,
+    fontSize: 14,
+    marginBottom: 2,
+  },
+  errorMessage: {
+    marginBottom: 2,
+    fontSize: 14,
   }
 });
