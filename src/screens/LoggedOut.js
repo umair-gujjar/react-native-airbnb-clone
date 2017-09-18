@@ -65,7 +65,8 @@ export default class LoggedOut extends Component {
           </TouchableOpacity>
           
           <View style={styles.termsAndConditions}>
-            <Text style={styles.termsText}>By tapping Continue, Create Account or More options,</Text>
+            <Text style={styles.termsText}>By tapping Continue, Create Account or More</Text>
+            <Text style={styles.termsText}>options, </Text>
             <Text style={styles.termsText}>I agree to Airbnb's</Text>
             <TouchableOpacity style={styles.linkButton}>
               <Text style={styles.termsText}>Terms of Service</Text>

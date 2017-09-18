@@ -192,13 +192,9 @@ export default class LogIn extends Component {
             <Notification
               showNotification={showNotification}
               onCloseNotification={this.closeNotification}
-              view={
-                <View style={styles.notificationContent}>
-                  <Text style={styles.errorText}>Error</Text>
-                  <Text style={styles.errorMessage}>Those credentials don't look right.</Text>
-                  <Text style={styles.errorMessage}>Please try again.</Text>
-                </View>
-              }
+              type="Error"
+              firstLine="Those credentials don't look right."
+              secondLine="Please try again."
             />
           </View>
         </View>
@@ -220,7 +216,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 20,
-    height: '80%',
+    flex: 1,
   },
   loginHeader: {
     fontSize: 28,
@@ -237,20 +233,5 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     right: 20,
     bottom: 0,
-  },
-  notificationContent: {
-    flexDirection:'row',
-    flexWrap: 'wrap', 
-    alignItems: 'flex-start',
-  },
-  errorText: {
-    color: colors.darkOrange,
-    marginRight: 5,
-    fontSize: 14,
-    marginBottom: 2,
-  },
-  errorMessage: {
-    marginBottom: 2,
-    fontSize: 14,
   }
 });
