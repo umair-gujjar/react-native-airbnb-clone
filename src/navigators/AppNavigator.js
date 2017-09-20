@@ -13,11 +13,13 @@ import colors from '../styles/colors';
 import LoggedOut from '../screens/LoggedOut';
 import Login from '../screens/LogIn';
 import ForgotPassword from '../screens/ForgotPassword';
+import TurnOnNotifications from '../screens/TurnOnNotifications';
 
 export const AppNavigator = StackNavigator({
     LoggedOut: { screen: LoggedOut },
     Login: { screen: Login },
-    ForgotPassword: { screen: ForgotPassword }
+    ForgotPassword: { screen: ForgotPassword },
+    TurnOnNotifications: { screen: TurnOnNotifications }
   },
   {
   	cardStyle: {

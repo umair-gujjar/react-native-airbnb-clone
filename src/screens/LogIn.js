@@ -88,6 +88,8 @@ export default class LogIn extends Component {
           loadingVisible: false,
           formStatus: 'valid',
         });
+        const { navigate } = this.props.navigation;
+        navigate('TurnOnNotifications');
       }
     },1000);
   }
