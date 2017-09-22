@@ -17,7 +17,7 @@ const initialNavState = AppNavigator.router.getStateForAction(
 
 export const nav = (state = initialNavState, action) => {
   let nextState = AppNavigator.router.getStateForAction(action, state);
-  if (action.routeName === 'TurnOnNotifications') {
+  if (action.routeName === 'TurnOnNotifications' || action.routeName === 'LoggedIn') {
     StatusBar.setBarStyle('dark-content', true);
   } else {
     StatusBar.setBarStyle('light-content', true);  	

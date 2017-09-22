@@ -9,7 +9,7 @@ import { PropTypes } from 'prop-types';
 import { transparentHeaderStyle } from '../styles/navigation';
 import colors from '../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { NavigationActions } from 'react-navigation'
 import {
   View,
   Text,
@@ -17,10 +17,15 @@ import {
   StyleSheet,
 } from 'react-native';
 
-export default class RegisterOut extends Component {
+const navigateToTabsAction = NavigationActions.navigate({
+  routeName: 'LoggedIn'
+});
+
+export default class TurnOnNotifications extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
     headerLeft: null,
-    headerStyle: transparentHeaderStyle
+    headerStyle: transparentHeaderStyle,
+    gesturesEnabled: false,
   });
 
   constructor(props) {
@@ -69,7 +74,7 @@ export default class RegisterOut extends Component {
           </Text>
           <TouchableHighlight
             style={[{backgroundColor: this.state.pressStatusNotifyBtn ? colors.darkGreen02 : colors.darkGreen}, styles.notifyButton]}
-            onPress={() => {}}
+            onPress={() => { this.props.navigation.dispatch(navigateToTabsAction); }}
             onHideUnderlay={this._onNotifyBtnHideUnderlay}
             onShowUnderlay={this._onNotifyBtnShowUnderlay}
             underlayColor={colors.darkGreen02}
@@ -78,7 +83,7 @@ export default class RegisterOut extends Component {
           </TouchableHighlight>
           <TouchableHighlight
             style={[{backgroundColor: this.state.pressStatusSkipBtn ? colors.gray01 : 'transparent'}, styles.skipButton]}
-            onPress={() => {}}
+            onPress={() => { this.props.navigation.dispatch(navigateToTabsAction); }}
             onHideUnderlay={this._onSkipBtnHideUnderlay}
             onShowUnderlay={this._onSkipBtnShowUnderlay}
             underlayColor={colors.gray01}
