@@ -70,7 +70,7 @@ export default class TurnOnNotifications extends Component {
             Turn on notifications?
           </Text>
           <Text style={styles.description}>
-            We can let you know when someone messages you, or notify you about other important account activity
+            We can let you know when someone messages you, or notify you about other important account activity.
           </Text>
           <TouchableHighlight
             style={[{backgroundColor: this.state.pressStatusNotifyBtn ? colors.darkGreen02 : colors.darkGreen}, styles.notifyButton]}

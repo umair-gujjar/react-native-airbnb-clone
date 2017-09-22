@@ -13,7 +13,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-export default class RegisterOut extends Component {
+export default class Register extends Component {
   render() {
     return (
       <View style={styles.wrapper}>

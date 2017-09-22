@@ -7,4 +7,5 @@ export default {
   darkOrange: '#d93900',
   lightGray: '#d9d9d9',
   gray01: '#f3f3f3',
+  pink: '#ff4a4f',
 };
