@@ -6,6 +6,9 @@
 
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { ActionCreators } from '../redux/actions'
 import colors from '../styles/colors';
 import { transparentHeaderStyle } from '../styles/navigation';
 import NavBarButton from '../components/buttons/NavBarButton';
@@ -22,7 +25,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 
-export default class LogIn extends Component {
+class LogIn extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
     headerRight: <NavBarButton
                    callback={() => navigation.navigate('ForgotPassword')}
@@ -77,19 +80,20 @@ export default class LogIn extends Component {
   
   goToNextStep() {
     this.setState({loadingVisible: true});
+    // Fake slow response to show loading screen
     setTimeout(() => {
-      if (this.state.emailAddress === 'wrong@email.com') {
-        this.setState({
-          loadingVisible: false,
-          formStatus: 'invalid',
-        });
-      } else {
+      if (this.props.logIn(this.state.emailAddress, '')) {
         this.setState({
           loadingVisible: false,
           formStatus: 'valid',
         });
         const { navigate } = this.props.navigation;
         navigate('TurnOnNotifications');
+      } else {
+        this.setState({
+          loadingVisible: false,
+          formStatus: 'invalid',
+        });
       }
     },1000);
   }
@@ -237,3 +241,15 @@ const styles = StyleSheet.create({
     bottom: 0,
   }
 });
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    loggedInStatus: state.loggedInStatus,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn); 
