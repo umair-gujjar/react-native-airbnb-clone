@@ -20,10 +20,19 @@ AirBnB iOS mobile app clone using React Native & Redux
 - Run npm install in the terminal
 - Run on IOS emulator
 
+## Login details
+- email: web@imandy.ie
+- password: 12345
 
 ## Required Dependencies
+- react
+- react-native
+- react-native-vector-icons
+- react-navigation
 - react-redux
 - redux
+- redux-logger
+- redux-thunk
 
 ## Optional Dependencies
 - redux-logger => [https://github.com/evgenyrodionov/redux-logger](https://github.com/evgenyrodionov/redux-logger)
