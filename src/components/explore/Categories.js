@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 
 import {
   ScrollView,
-  TouchableOpacity,
+  TouchableHighlight,
   Image,
   View,
   Dimensions,
@@ -32,7 +32,7 @@ export default class Categories extends Component {
     let cards = [];
     categories.map((category, index) => {
       cards.push(
-        <TouchableOpacity
+        <TouchableHighlight
           style={styles.card}
           key={index}
         >
@@ -41,7 +41,7 @@ export default class Categories extends Component {
             resizeMode='contain'
             source={category.photo}
           />
-        </TouchableOpacity>
+        </TouchableHighlight>
       );
     })
     return cards;
