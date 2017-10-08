@@ -36,7 +36,6 @@ export default class ExploreContainer extends Component {
       <ScrollView style={styles.scrollview}>
         <Text style={styles.heading}>Explore Airbnb</Text>
         <Categories categories={categoriesList} />
-        <Text style={styles.welcomeText}>Explore Tab</Text>
       </ScrollView>
       </View>
     );
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   scrollview: {
-    paddingTop: 60,
+    paddingTop: 100,
   },
   heading: {
     fontSize: 22,
