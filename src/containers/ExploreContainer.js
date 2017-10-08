@@ -6,9 +6,11 @@
 
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Categories from '../components/explore/Categories';
+import categoriesList from '../data/categories';
 
 import {
-  View,
+  ScrollView,
   Text,
   StyleSheet,
 } from 'react-native';
@@ -27,9 +29,10 @@ export default class ExploreContainer extends Component {
 
   render() {
     return (
-      <View style={styles.wrapper}>
+      <ScrollView style={styles.wrapper}>
+        <Categories categories={categoriesList} />
         <Text style={styles.welcomeText}>Explore Tab</Text>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -37,6 +40,6 @@ export default class ExploreContainer extends Component {
 const styles = StyleSheet.create({
   wrapper: {
     display: 'flex',
-    padding: 50,
+    marginTop: 50,
   },
 });
