@@ -24,7 +24,7 @@ AirBnB iOS mobile app clone using React Native & Redux
 - email: web@imandy.ie
 - password: 12345
 
-## Required Dependencies
+## Dependencies
 - react
 - react-native
 - react-native-vector-icons
@@ -33,7 +33,3 @@ AirBnB iOS mobile app clone using React Native & Redux
 - redux
 - redux-logger
 - redux-thunk
-
-## Optional Dependencies
-- redux-logger => [https://github.com/evgenyrodionov/redux-logger](https://github.com/evgenyrodionov/redux-logger)
-- redux-thunk => [https://github.com/gaearon/redux-thunk](https://github.com/gaearon/redux-thunk)
