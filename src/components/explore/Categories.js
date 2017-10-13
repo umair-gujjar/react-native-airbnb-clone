@@ -52,6 +52,7 @@ export default class Categories extends Component {
       <ScrollView
         contentContainerStyle={styles.wrapper}
         horizontal={true}
+        showsHorizontalScrollIndicator={false}
       >
         {this.getCategories()}
       </ScrollView>
