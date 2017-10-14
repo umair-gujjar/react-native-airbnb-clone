@@ -44,6 +44,12 @@ export default class Stars extends Component {
   }
 
   render() {
+    if (this.props.votes === '0') {
+      return (
+        <View></View>
+      );
+    }
+
     const starsNumber = this.props.votes ? <Text style={styles.starsNumber}>{this.props.votes}</Text> : null;
     return (
       <View style={styles.wrapper}>
