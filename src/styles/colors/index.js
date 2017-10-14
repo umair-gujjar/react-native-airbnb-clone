@@ -1,6 +1,7 @@
 export default {
   darkGreen: '#008087',
   darkGreen02: '#02656b',
+  green: '#7d9748',
   white: '#ffffff',
   black: '#000000',
   semiTransparentWhite: 'rgba(255,255,255,0.6)',
@@ -11,4 +12,7 @@ export default {
   gray03: '#b3b3b3',
   gray04: '#919191',
   pink: '#ff4a4f',
+  brown01: '#846338',
+  brown02: '#aa8158', 
+  blue: '#1377c3',
 };

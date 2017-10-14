@@ -20,8 +20,8 @@ import {
   StyleSheet,
 } from 'react-native';
 
-let cardSize = 100;
-let cardMargin = 8;
+let cardSize = 157;
+let cardMargin = 6;
 
 export default class Listings extends Component {
   constructor(props) {
@@ -32,6 +32,19 @@ export default class Listings extends Component {
     }
   }
   
+  getRandomColor() {
+    const colorsList = [
+      colors.gray02,
+      colors.darkOrange,
+      colors.black,
+      colors.brown01,
+      colors.blue,
+      colors.brown02,
+      colors.green,
+    ];
+    return colorsList[Math.floor(Math.random()*colorsList.length)];
+  }
+
   componentWillMount() {
     const listings = this.props.listings;
     const listingsArray = [];
@@ -47,7 +60,7 @@ export default class Listings extends Component {
               resizeMode='contain'
               source={val.photo}
             />
-            <Text style={styles.listingType}>{val.type}</Text>
+            <Text style={[{color: this.getRandomColor()},styles.listingType]}>{val.type}</Text>
             <Text
               style={styles.listingTitle}
               numberOfLines={2}
@@ -67,10 +80,15 @@ export default class Listings extends Component {
   }
 
   render() {
+    let titleStyle = {fontSize: 18};
+    if (this.props.boldTitle) {
+      titleStyle = {fontSize: 22, fontWeight: '600'}
+    }
+
     return (
       <View style={styles.wrapper}>
         <View style={styles.titleWrapper}>
-          <Text style={styles.title}>{this.props.title}</Text>
+          <Text style={[titleStyle,styles.title]}>{this.props.title}</Text>
           <TouchableOpacity style={styles.seeAllBtn}>
             <Text style={styles.seeAllBtnText}>See all</Text>
             <Icon
@@ -95,6 +113,7 @@ export default class Listings extends Component {
 
 Listings.propTypes = {
   title: PropTypes.string.isRequired,
+  boldTitle: PropTypes.bool,
   listings: PropTypes.array.isRequired,
 };
 
@@ -103,7 +122,6 @@ const styles = StyleSheet.create({
     display: 'flex',
   },
   title: {
-    fontSize: 18,
     color: colors.gray02,
   },
   titleWrapper: {
@@ -133,7 +151,7 @@ const styles = StyleSheet.create({
     marginLeft: cardMargin,
     display: 'flex',
     flexDirection: 'column',
-    width: 150,
+    width: cardSize,
     minHeight: 100,
   },
   imageWrapper: {
@@ -148,8 +166,7 @@ const styles = StyleSheet.create({
   },
   listingType: {
     fontWeight: '700',
-    fontSize: 11,
-    color: colors.gray02,
+    fontSize: 10,
   },
   listingTitle: {
     fontSize: 14,

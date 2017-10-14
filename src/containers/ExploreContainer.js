@@ -52,6 +52,7 @@ export default class ExploreContainer extends Component {
           <Listings
             key={i}
             title={val.title}
+            boldTitle={val.boldTitle}
             listings={val.listings}
           />
         </View>
