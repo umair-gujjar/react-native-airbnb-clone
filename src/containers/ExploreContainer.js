@@ -54,6 +54,7 @@ export default class ExploreContainer extends Component {
             title={val.title}
             boldTitle={val.boldTitle}
             listings={val.listings}
+            showAddToFav={val.showAddToFav}
           />
         </View>
       );

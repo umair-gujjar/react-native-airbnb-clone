@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Stars from '../Stars';
+import HeartButton from '../buttons/HeartButton';
 import colors from '../../styles/colors';
 
 import {
@@ -44,6 +45,10 @@ export default class Listings extends Component {
     ];
     return colorsList[Math.floor(Math.random()*colorsList.length)];
   }
+  
+  addToFavourite() {
+    alert('Added');
+  }
 
   componentWillMount() {
     const listings = this.props.listings;
@@ -55,6 +60,15 @@ export default class Listings extends Component {
           style={styles.card}
         >
           <View style={styles.cardContent}>
+            {this.props.showAddToFav ?
+              <View style={styles.addToFavoriteBtn}>
+                <HeartButton
+                  callback={this.addToFavourite}
+                  color={colors.white}
+                  selectedColor={colors.pink}
+                />
+              </View>
+            : null }
             <Image
               style={styles.image}
               resizeMode='contain'
@@ -115,6 +129,7 @@ Listings.propTypes = {
   title: PropTypes.string.isRequired,
   boldTitle: PropTypes.bool,
   listings: PropTypes.array.isRequired,
+  showAddToFav: PropTypes.bool
 };
 
 const styles = StyleSheet.create({
@@ -156,6 +171,12 @@ const styles = StyleSheet.create({
   },
   imageWrapper: {
     flex: 1,
+  },
+  addToFavoriteBtn: {
+    position: 'absolute',
+    right: 12,
+    top: 7,
+    zIndex: 2,
   },
   image: {
     flex: 1,

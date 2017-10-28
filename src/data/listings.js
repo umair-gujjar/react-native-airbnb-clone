@@ -8,6 +8,7 @@ const listings = [
   {
     title: 'Experiences',
     boldTitle: false,
+    showAddToFav: true,
     listings: [
       {
         photo: require('./photos/listing1.png'),
@@ -62,6 +63,7 @@ const listings = [
   {
     title: 'Homes',
     boldTitle: false,
+    showAddToFav: true,
     listings: [
       {
         photo: require('./photos/listing7.png'),
@@ -108,6 +110,7 @@ const listings = [
   {
     title: 'Popular Reservations',
     boldTitle: true,
+    showAddToFav: false,
     listings: [
       {
         photo: require('./photos/listing12.png'),
