@@ -24,7 +24,7 @@ export default class HeartButton extends Component {
   }
   
   addToFavorite() {
-    this.props.callback();
+    this.props.callback(!this.state.addedToFavorite, this.props.itemId);
     this.setState({
       addedToFavorite: !this.state.addedToFavorite,
     });
@@ -61,6 +61,7 @@ HeartButton.propTypes = {
   callback: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired,
   selectedColor: PropTypes.string.isRequired,
+  itemId: PropTypes.number.isRequired,
 };
 
 const styles = StyleSheet.create({

@@ -12,7 +12,9 @@ import categoriesList from '../data/categories';
 import colors from '../styles/colors';
 import SearchBar from '../components/SearchBar';
 import listings from '../data/listings';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { ActionCreators } from '../redux/actions'
 import {
   ScrollView,
   Text,
@@ -20,7 +22,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-export default class ExploreContainer extends Component {
+class ExploreContainer extends Component {
   static navigationOptions = {
     tabBarLabel: 'EXPLORE',
     tabBarIcon: ({ tintColor }) => (
@@ -38,8 +40,20 @@ export default class ExploreContainer extends Component {
     this.state = {
       listings: {},
     }
+    this.addToFav = this.addToFav.bind(this);
   }
   
+  addToFav(added, itemId) {
+    const addedToFav = this.props.addedToFavorite;
+    if (added) {
+      addedToFav.push(itemId);
+    } else {
+      const index = addedToFav.indexOf(itemId);
+      addedToFav.splice(index, 1);
+    }
+    this.props.addToFavorite(addedToFav);
+  }
+
   componentWillMount() {
     const listingsArray = [];
 
@@ -55,6 +69,7 @@ export default class ExploreContainer extends Component {
             boldTitle={val.boldTitle}
             listings={val.listings}
             showAddToFav={val.showAddToFav}
+            onAddToFav={this.addToFav}
           />
         </View>
       );
@@ -108,3 +123,15 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   }
 });
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    addedToFavorite: state.addedToFavorite,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExploreContainer); 

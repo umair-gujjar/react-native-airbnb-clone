@@ -31,6 +31,7 @@ export default class Listings extends Component {
     this.state = {
       listings: {},
     }
+    this.addToFavorite = this.addToFavorite.bind(this);
   }
   
   getRandomColor() {
@@ -46,8 +47,8 @@ export default class Listings extends Component {
     return colorsList[Math.floor(Math.random()*colorsList.length)];
   }
   
-  addToFavourite() {
-    alert('Added');
+  addToFavorite(added, itemId) {
+    this.props.onAddToFav(added, itemId);
   }
 
   componentWillMount() {
@@ -56,16 +57,17 @@ export default class Listings extends Component {
     listings.map((val, i) => {
       listingsArray.push(
         <TouchableHighlight
-          key={i}
+          key={val.id}
           style={styles.card}
         >
           <View style={styles.cardContent}>
             {this.props.showAddToFav ?
               <View style={styles.addToFavoriteBtn}>
                 <HeartButton
-                  callback={this.addToFavourite}
+                  callback={this.addToFavorite}
                   color={colors.white}
                   selectedColor={colors.pink}
+                  itemId={val.id}
                 />
               </View>
             : null }
