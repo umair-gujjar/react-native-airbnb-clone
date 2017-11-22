@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Categories from '../components/explore/Categories';
 import Listings from '../components/explore/Listings';
@@ -13,8 +14,8 @@ import colors from '../styles/colors';
 import SearchBar from '../components/SearchBar';
 import listings from '../data/listings';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import { ActionCreators } from '../redux/actions'
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../redux/actions';
 import {
   ScrollView,
   Text,
@@ -39,7 +40,8 @@ class ExploreContainer extends Component {
 
     this.state = {
       listings: {},
-    }
+    };
+
     this.addToFav = this.addToFav.bind(this);
   }
   
@@ -82,17 +84,17 @@ class ExploreContainer extends Component {
   render() {
     return (
       <View style={styles.wrapper}>
-      <SearchBar />
-      <ScrollView
-        style={styles.scrollview}
-        contentContainerStyle={styles.scrollViewContent}
-      >
-        <Text style={styles.heading}>Explore Airbnb</Text>
-        <View style={styles.categories}>
-          <Categories categories={categoriesList} />
-        </View>
-        {this.state.listings}
-      </ScrollView>
+        <SearchBar />
+        <ScrollView
+          style={styles.scrollview}
+          contentContainerStyle={styles.scrollViewContent}
+        >
+          <Text style={styles.heading}>{'Explore Airbnb'}</Text>
+          <View style={styles.categories}>
+            <Categories categories={categoriesList} />
+          </View>
+          {this.state.listings}
+        </ScrollView>
       </View>
     );
   }
@@ -133,5 +135,10 @@ function mapStateToProps(state) {
     addedToFavorite: state.addedToFavorite,
   };
 }
+
+ExploreContainer.propTypes = {
+  addedToFavorite: PropTypes.array.isRequired,
+  addToFavorite: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreContainer); 

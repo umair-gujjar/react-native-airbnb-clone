@@ -1,13 +1,21 @@
 module.exports = {
+    "parser": "babel-eslint",
+    "globals": {
+      "__DEV__": true
+    },
     "env": {
         "browser": true,
         "commonjs": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
+            "modules": true,
             "jsx": true
         },
         "sourceType": "module"

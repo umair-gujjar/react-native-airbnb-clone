@@ -23,7 +23,7 @@ export default class Notification extends Component {
     super(props);
     this.state = {
       positionValue: new Animated.Value(60),
-    }
+    };
   }
 
   animateNotification(value) {

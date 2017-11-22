@@ -21,15 +21,14 @@ export default class Loader extends Component {
         animationType={this.props.animationType}
         transparent={true}
         visible={this.props.modalVisible}
-        onRequestClose={() => {alert("Modal has been closed.")}}
-       >
-         <View style={styles.wrapper}>
-           <View style={styles.loaderContainer}>
-             <Image
-               style={styles.loaderImage}
-               source={require('../img/loading.gif')}
-             />
-           </View>
+      >
+        <View style={styles.wrapper}>
+          <View style={styles.loaderContainer}>
+            <Image
+              style={styles.loaderImage}
+              source={require('../img/loading.gif')}
+            />
+          </View>
         </View>
       </Modal>
     );
@@ -58,10 +57,13 @@ const styles = StyleSheet.create({
     marginTop: -45,
   },
   loaderImage: {
-    width: '70%',
-    height: '70%',
     width: 90,
     height: 90,
     borderRadius: 15,
   }
 });
+
+Loader.propTypes = {
+  animationType: PropTypes.string.isRequired,
+  modalVisible: PropTypes.bool.isRequired,
+};

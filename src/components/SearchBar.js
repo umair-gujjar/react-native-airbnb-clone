@@ -19,13 +19,13 @@ export default class TripsContainer extends Component {
     return (
       <View style={styles.wrapper}>
         <View style={styles.searchContainer}>
-	      <Icon
-	        name='ios-search'
-	        size={20}
-	        color={colors.gray04}
-	        style={styles.searchIcon}
-	      />
-          <Text style={styles.inputText}>Try "Cape Town"</Text>
+          <Icon
+            name='ios-search'
+            size={20}
+            color={colors.gray04}
+            style={styles.searchIcon}
+          />
+          <Text style={styles.inputText}>{'Try "Cape Town"'}</Text>
         </View>
       </View>
     );

@@ -5,10 +5,6 @@
  */
 
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../redux/actions';
 import colors from '../styles/colors';
 import { transparentHeaderStyle } from '../styles/navigation';
 import RoundedButton from '../components/buttons/RoundedButton';
@@ -25,18 +21,18 @@ import {
 
 export default class LoggedOut extends Component {
 
-  static navigationOptions = ({ navigation, screenProps }) => ({
+  static navigationOptions = ({ navigation }) => ({
     headerRight: <NavBarButton callback={() => navigation.navigate('Login')} location="right" color={colors.white} text="Log In" />,
     headerStyle: transparentHeaderStyle,
     headerTintColor: colors.white,
   });
 
   continueWithFacebook() {
-    alert("Continue with Facebook pressed");
+    alert('Continue with Facebook pressed');
   }
   
   createAccount() {
-    alert("Create account pressed");
+    alert('Create account pressed');
   }
 
   render() {
@@ -47,7 +43,7 @@ export default class LoggedOut extends Component {
             style={styles.logo}
             source={require('../img/airbnb-logo.png')}
           />
-          <Text style={styles.welcomeText}>Welcome to Airbnb.</Text>
+          <Text style={styles.welcomeText}>{'Welcome to Airbnb.'}</Text>
           <RoundedButton
             text="Continue with Facebook"
             callback={this.continueWithFacebook}
@@ -65,25 +61,25 @@ export default class LoggedOut extends Component {
           </TouchableOpacity>
           
           <View style={styles.termsAndConditions}>
-            <Text style={styles.termsText}>By tapping Continue, Create Account or More</Text>
-            <Text style={styles.termsText}>options, </Text>
-            <Text style={styles.termsText}>I agree to Airbnb's</Text>
+            <Text style={styles.termsText}>{'By tapping Continue, Create Account or More'}</Text>
+            <Text style={styles.termsText}>{'options, '}</Text>
+            <Text style={styles.termsText}>{'I agree to Airbnb`s '}</Text>
             <TouchableOpacity style={styles.linkButton}>
-              <Text style={styles.termsText}>Terms of Service</Text>
+              <Text style={styles.termsText}>{'Terms of Service'}</Text>
             </TouchableOpacity>
-            <Text style={styles.termsText}>,</Text>
+            <Text style={styles.termsText}>{','}</Text>
             <TouchableOpacity style={styles.linkButton}>
-              <Text style={styles.termsText}>Payments Terms of Service</Text>
+              <Text style={styles.termsText}>{'Payments Terms of Service'}</Text>
             </TouchableOpacity>
-            <Text style={styles.termsText}>,</Text>
+            <Text style={styles.termsText}>{','}</Text>
             <TouchableOpacity style={styles.linkButton}>
-              <Text style={styles.termsText}>Privacy Policy</Text>
+              <Text style={styles.termsText}>{'Privacy Policy'}</Text>
             </TouchableOpacity>
-            <Text style={styles.termsText}>, and</Text>
+            <Text style={styles.termsText}>{', and'}</Text>
             <TouchableOpacity style={styles.linkButton}>
-              <Text style={styles.termsText}>Nondiscrimination Policy</Text>
+              <Text style={styles.termsText}>{'Nondiscrimination Policy'}</Text>
             </TouchableOpacity>
-            <Text style={styles.termsText}>.</Text>
+            <Text style={styles.termsText}>{'.'}</Text>
           </View>
         </View>
       </View>

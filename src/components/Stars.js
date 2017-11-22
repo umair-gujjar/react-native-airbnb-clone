@@ -21,7 +21,7 @@ export default class Stars extends Component {
 
     this.state = {
       stars: []
-    }
+    };
   }
 
   componentWillMount() {
@@ -35,7 +35,7 @@ export default class Stars extends Component {
           size={this.props.size}
           color={starsNumber > i ? this.props.color : colors.gray04}
           style={styles.star}
-       />
+        />
       );
     }
     this.setState({

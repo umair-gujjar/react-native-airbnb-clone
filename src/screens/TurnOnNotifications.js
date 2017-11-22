@@ -9,7 +9,7 @@ import { PropTypes } from 'prop-types';
 import { transparentHeaderStyle } from '../styles/navigation';
 import colors from '../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
 import {
   View,
   Text,
@@ -22,7 +22,7 @@ const navigateToTabsAction = NavigationActions.navigate({
 });
 
 export default class TurnOnNotifications extends Component {
-  static navigationOptions = ({ navigation, screenProps }) => ({
+  static navigationOptions = () => ({
     headerLeft: null,
     headerStyle: transparentHeaderStyle,
     gesturesEnabled: false,
@@ -143,3 +143,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
   }
 });
+
+TurnOnNotifications.propTypes = {
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func
+  }),
+};

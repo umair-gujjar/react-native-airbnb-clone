@@ -7,8 +7,8 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import { ActionCreators } from '../redux/actions'
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../redux/actions';
 import colors from '../styles/colors';
 import { transparentHeaderStyle } from '../styles/navigation';
 import NavBarButton from '../components/buttons/NavBarButton';
@@ -26,24 +26,24 @@ import {
 } from 'react-native';
 
 class LogIn extends Component {
-  static navigationOptions = ({ navigation, screenProps }) => ({
+  static navigationOptions = ({ navigation }) => ({
     headerRight: <NavBarButton
-                   callback={() => navigation.navigate('ForgotPassword')}
-                   location="right"
-                   color={colors.white}
-                   text="Forgot password"
-                  />,
+      callback={() => navigation.navigate('ForgotPassword')}
+      location="right"
+      color={colors.white}
+      text="Forgot password"
+    />,
     headerLeft: <NavBarButton
-                  callback={() => navigation.goBack()}
-                  location="left"
-                  icon={
-                    <Icon
-                      name="angle-left"
-                      color={colors.white}
-                      size={30}
-                    />
-                  }
-                />,
+      callback={() => navigation.goBack()}
+      location="left"
+      icon={
+        <Icon
+          name="angle-left"
+          color={colors.white}
+          size={30}
+        />
+      }
+    />,
     headerStyle: transparentHeaderStyle,
     headerTintColor: colors.white
   });
@@ -58,7 +58,7 @@ class LogIn extends Component {
       validPassword: false,
       loadingVisible: false,
 
-    }
+    };
     this.handleScroll = this.handleScroll.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
@@ -99,7 +99,9 @@ class LogIn extends Component {
   }
 
   onEmailChange(text) {
+    // eslint-disable-next-line
     const emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     this.setState({
       emailAddress: text
     });
@@ -251,5 +253,12 @@ function mapStateToProps(state) {
     loggedInStatus: state.loggedInStatus,
   };
 }
+
+LogIn.propTypes = {
+  logIn: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func
+  })
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn); 

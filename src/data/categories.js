@@ -17,6 +17,6 @@ const categoriesList = [
     name: 'Restaurants',
     photo: require('./photos/restaurantsCategory.png'),
   },
-]
+];
 
 export default categoriesList;

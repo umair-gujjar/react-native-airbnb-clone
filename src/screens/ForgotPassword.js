@@ -5,7 +5,6 @@
  */
 
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
 import colors from '../styles/colors';
 import { transparentHeaderStyle } from '../styles/navigation';
 import InputField from '../components/form/InputField';
@@ -24,18 +23,18 @@ import {
 
 export default class ForgotPassword extends Component {
 
-  static navigationOptions = ({ navigation, screenProps }) => ({
+  static navigationOptions = ({ navigation }) => ({
     headerLeft: <NavBarButton
-                  callback={() => navigation.goBack()}
-                  location="left"
-                  icon={
-                    <Icon
-                      name="angle-left"
-                      color={colors.white}
-                      size={30}
-                    />
-                  }
-                />,
+      callback={() => navigation.goBack()}
+      location="left"
+      icon={
+        <Icon
+          name="angle-left"
+          color={colors.white}
+          size={30}
+        />
+      }
+    />,
     headerStyle: transparentHeaderStyle,
     headerTintColor: colors.white
   });
@@ -47,7 +46,7 @@ export default class ForgotPassword extends Component {
       loadingVisible: false,
       validEmail: false,
       emailAddress: '',
-    }
+    };
 
     this.onEmailChange = this.onEmailChange.bind(this);
     this.goToNextStep = this.goToNextStep.bind(this);
@@ -55,7 +54,9 @@ export default class ForgotPassword extends Component {
   }
 
   onEmailChange(text) {
+    // eslint-disable-next-line
     const emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     this.setState({
       emailAddress: text
     });
